@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+# emacs
+*~
+# configuration data
+etc/dshield.ini
+# sample data
+Data/*
+/etc/dshield.ini
+/Data/*

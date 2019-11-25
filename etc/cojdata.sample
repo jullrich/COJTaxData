@@ -1,0 +1,7 @@
+# edit and rename as cojdata.ini
+[cojdata]
+mysqluser=<mysql user name>
+mysqlpass=<mysql password>
+mysqldatabase=<mysql schema name>
+mysqlhost=<mysql host>
+DataCacheDir=<directory used to cache data files>
