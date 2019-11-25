@@ -105,8 +105,8 @@ venv.bak/
 # emacs
 *~
 # configuration data
-etc/dshield.ini
+etc/cojdata.ini
 # sample data
 Data/*
-/etc/dshield.ini
+/etc/cojdata.ini
 /Data/*
