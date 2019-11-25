@@ -108,5 +108,3 @@ venv.bak/
 etc/cojdata.ini
 # sample data
 Data/*
-/etc/cojdata.ini
-/Data/*
