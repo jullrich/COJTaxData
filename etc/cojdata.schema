@@ -1,0 +1,121 @@
+-- MySQL dump 10.13  Distrib 5.7.28, for Linux (x86_64)
+--
+-- Host: localhost    Database: cojdata
+-- ------------------------------------------------------
+-- Server version	5.7.28-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `addresses`
+--
+
+DROP TABLE IF EXISTS `addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `addresses` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `streetnumber` int(10) unsigned DEFAULT NULL,
+  `streetname` varchar(255) DEFAULT NULL,
+  `streettype` varchar(255) DEFAULT NULL,
+  `direction` char(1) DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zip` varchar(255) DEFAULT NULL,
+  `springfield` enum('Y','N') DEFAULT NULL,
+  `zoneing` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `appraiserrecords`
+--
+
+DROP TABLE IF EXISTS `appraiserrecords`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `appraiserrecords` (
+  `re6` int(10) unsigned DEFAULT NULL,
+  `re4` int(10) unsigned DEFAULT NULL,
+  `taxdistrict` varchar(255) DEFAULT NULL,
+  `propertyuse` varchar(255) DEFAULT NULL,
+  `buildings` int(10) unsigned DEFAULT NULL,
+  `subdivision` varchar(255) DEFAULT NULL,
+  `totalarea` int(10) unsigned DEFAULT NULL,
+  `characteristics` varchar(255) DEFAULT NULL,
+  `recordbookpage` varchar(255) NOT NULL,
+  `tilenumber` int(10) unsigned DEFAULT NULL,
+  `ownername` varchar(255) DEFAULT NULL,
+  `owneraddress` varchar(255) DEFAULT NULL,
+  `zoning` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`recordbookpage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `searchresults`
+--
+
+DROP TABLE IF EXISTS `searchresults`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `searchresults` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `ownername` varchar(255) DEFAULT NULL,
+  `streetnumber` int(10) unsigned DEFAULT NULL,
+  `streetname` varchar(255) DEFAULT NULL,
+  `streettype` varchar(255) DEFAULT NULL,
+  `direction` varchar(255) DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zip` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `taxrecord`
+--
+
+DROP TABLE IF EXISTS `taxrecord`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `taxrecord` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `year` int(10) unsigned DEFAULT NULL,
+  `valuemethod` varchar(255) DEFAULT NULL,
+  `buildingvalue` decimal(8,2) DEFAULT NULL,
+  `landvaluemarket` decimal(8,2) DEFAULT NULL,
+  `landvalueagric` decimal(8,2) DEFAULT NULL,
+  `justmarketvalue` decimal(8,2) DEFAULT NULL,
+  `assessedvalue` decimal(8,2) DEFAULT NULL,
+  `exemptions` decimal(8,2) DEFAULT NULL,
+  `taxablevalue` decimal(8,2) DEFAULT NULL,
+  `zoning` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-11-25  6:07:21
