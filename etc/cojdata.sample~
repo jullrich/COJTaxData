@@ -1,6 +1,0 @@
-[cojdata]
-mysqluser=cojdata
-mysqlpass=5a7a5394f3c887fb520ab3805470c4432
-mysqldatabase=cojdata
-mysqlhost=10.128.0.7
-DataCacheDir=~/Documents/Projects/COJTaxData/Data
