@@ -1,0 +1,5 @@
+requests
+lxml
+sys
+mysql.connector
+configparser
