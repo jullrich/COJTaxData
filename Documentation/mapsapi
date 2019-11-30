@@ -24,6 +24,16 @@ curl -X POST -H 'Content-Type: application/json' -d '{prefixText: "Curry", count
 Images for the map can be found here:
 http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer
 
+Easiest way to get property data from the map API:
+
+```
+http://maps.coj.net/coj/rest/services/DuvalMaps/DuvalCivilPlanning/MapServer//2/query?f=json&where=RE%20%3D%20%27071424%200000%27%20AND%201%3D1&outFields=*
+```
+
+note the odd "and 1=1" suffix in the query. This appears to be the result of some simple, likely insufficient, SQL injection 
+mitigation. You will get an error if you do not add that. "where" is essentially SQL, so you may query for other fields as well. outFields=* will return all data.
+
+
 # Coordinates
 
 unit is in meters. 
