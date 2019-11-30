@@ -19,6 +19,6 @@ data = {'ctl00$cphBody$tbRE6': '',
         'ctl00$cphBody$ddCity': '',
         'ctl00$cphBody$tbZipCode': '32209'}
 
-coj=COJData(config)
-lines=coj.search(data,25)
-print("%d Lines Inserted" % (lines) )
+coj = COJData(config)
+lines = coj.search(data, 50)
+print("%d Lines Inserted" % lines)

@@ -1,5 +1,6 @@
 requests
 lxml
 sys
+mysql
 mysql.connector
 configparser
