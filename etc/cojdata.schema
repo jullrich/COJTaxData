@@ -34,6 +34,8 @@ CREATE TABLE `addresses` (
   `zip` varchar(255) DEFAULT NULL,
   `springfield` enum('Y','N') DEFAULT NULL,
   `zoneing` varchar(255) DEFAULT NULL,
+  `gottaxesmin` int(10) unsigned DEFAULT NULL,
+  `gottaxesmax` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`re6`,`re4`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -86,6 +88,68 @@ CREATE TABLE `searchresults` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `taxbilldetails`
+--
+
+DROP TABLE IF EXISTS `taxbilldetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `taxbilldetails` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `year` int(10) unsigned NOT NULL,
+  `folio` varchar(255) DEFAULT NULL,
+  `taxingcode` int(10) unsigned NOT NULL,
+  `taxingauthority` varchar(255) DEFAULT NULL,
+  `assessedvalue` decimal(8,2) DEFAULT NULL,
+  `exemptionamount` decimal(8,2) DEFAULT NULL,
+  `taxablevalue` decimal(8,2) DEFAULT NULL,
+  `millagerate` float DEFAULT NULL,
+  `taxes` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`re4`,`re6`,`year`,`taxingcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `taxbillfeedetails`
+--
+
+DROP TABLE IF EXISTS `taxbillfeedetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `taxbillfeedetails` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `year` int(10) unsigned NOT NULL,
+  `folio` varchar(255) DEFAULT NULL,
+  `feecode` varchar(255) NOT NULL,
+  `feeauthority` varchar(255) DEFAULT NULL,
+  `fees` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`,`year`,`feecode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `taxbills`
+--
+
+DROP TABLE IF EXISTS `taxbills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `taxbills` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `year` int(10) unsigned NOT NULL,
+  `folio` varchar(255) NOT NULL,
+  `ownername` varchar(255) DEFAULT NULL,
+  `amountdue` varchar(255) DEFAULT NULL,
+  `taxes` decimal(8,2) DEFAULT NULL,
+  `fees` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`,`year`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `taxrecord`
 --
 
@@ -108,6 +172,25 @@ CREATE TABLE `taxrecord` (
   PRIMARY KEY (`re6`,`re4`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `x`
+--
+
+DROP TABLE IF EXISTS `x`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `x` (
+  `re6` int(10) unsigned NOT NULL,
+  `re4` int(10) unsigned NOT NULL,
+  `year` int(10) unsigned NOT NULL,
+  `folio` varchar(255) DEFAULT NULL,
+  `feecode` varchar(255) NOT NULL,
+  `feeauthority` varchar(255) DEFAULT NULL,
+  `fees` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`re6`,`re4`,`year`,`feecode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -118,4 +201,4 @@ CREATE TABLE `taxrecord` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-25  6:07:21
+-- Dump completed on 2019-11-30  2:56:33
