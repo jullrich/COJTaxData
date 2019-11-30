@@ -1,0 +1,38 @@
+### Maps API ###
+
+The Jacksonville GIS site (maps.coj.net) offers a pretty straight forward API and is probably the easiest way to
+automate queries for city data. A WSDL can be found here:
+
+http://maps.coj.net/DuvalCivilPlanning/AddressDropDowns.asmx?wsdl
+and
+http://maps.coj.net/coj/rest/services/DuvalMaps/DuvalCivilPlanning/MapServer?wsdl
+
+Or human readable documentation can be found here:
+
+http://maps.coj.net/DuvalCivilPlanning/AddressDropDowns.asmx
+
+The system is built around ARCGIS, a standard maping API.
+
+Some of the documentation only shows the SOAP interface. But the APIs also offers a REST interface.
+For example:
+
+# List of all owner's names with a given prefix #
+```
+curl -X POST -H 'Content-Type: application/json' -d '{prefixText: "Curry", count: 100, contextKey: null}' http://maps.coj.net/DuvalCivilPlanning/AddressDropDowns.asmx/GetOwner
+```
+
+Images for the map can be found here:
+http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer
+
+# Coordinates
+
+unit is in meters. 
+
+8th / Main: x = -9089677.260057654 y = 3548067.5917405332
+12th / Boulevard: "x":-9090453.573626198,"y":3548714.9178238404
+Railroad T by 12th/Carmen: "x":-9088743.29511827,"y":3548722.0837952425
+2nd / Clark: "x":-9088824.509460825,"y":3546956.866173236
+
+rough Springfield Envelope 
+-9090500,3546700,-9088700,3549000
+
