@@ -17,6 +17,11 @@ def re10tolist(re):
     return relist
 
 
+def re10tospace(re):
+    relist = re10tolist(re)
+    return relist[0]+' '+relist[1]
+
+
 class COJData:
     taxcollectorurl = 'https://fl-duval-taxcollector.publicaccessnow.com/PropertyTaxSearch/AccountDetail/BillDetail' \
                       '.aspx?p= '
@@ -25,6 +30,8 @@ class COJData:
     resulturl = 'https://paopropertysearch.coj.net/Basic/Results.aspx'
     taxoverviewurl = 'https://fl-duval-taxcollector.publicaccessnow.com/propertytaxsearch/accountdetail.aspx?p='
     taxbillurl = 'https://fl-duval-taxcollector.publicaccessnow.com/PropertyTaxSearch/AccountDetail/BillDetail.aspx?p='
+    mapqueryurl = 'http://maps.coj.net/coj/rest/services/DuvalMaps/DuvalCivilPlanning/MapServer//2/query?' \
+                  'f=json&outFields=*&where='
     config = {}
     cachedir = ''
     session = ''
@@ -109,6 +116,27 @@ class COJData:
             sys.exit(1)
         return page
 
+    def get_map_data(self, re):
+        if self.check_cache(re, ' json'):
+            return True
+        re = re10tospace(re).replace(' ', '%20')
+        page = self.get(self.mapqueryurl+'RE%20%3D%20%27'+re+'%27%20AND%201%3D1')
+        self.save_file(page.text, re.replace(' ', ''), 'json')
+
+    def get_map_data_query(self, query):
+        cursor = self.get_db_cursor()
+        cursor.execute(query)
+        records = 0
+        while True:
+            row = cursor.fetchone()
+            if row is None:
+                break
+            records = records+1
+            re = "{:06d}{:04d}".format(row[0], row[1])
+            print("Retrieving RE %s" % re)
+            self.get_map_data(re)
+        print("Total Records: %d" % records)
+
     def get_property_record(self, re):
         if self.check_cache(re, 'pr'):
             return True
@@ -151,7 +179,7 @@ class COJData:
                 break
             records = records + 1
             re = "{:06d}{:04d}".format(row[0], row[1])
-            print("%s %s" % (records,re))
+            print("%s %s" % (records, re))
             self.get_tax_overview(re)
             self.parse_tax_overview(re)
         print("Total Records: %d")
@@ -178,7 +206,7 @@ class COJData:
             if columns == 4:
                 lines = lines + 1
                 columns = 0
-                if len(billline) == 6 and int(billline[2]) < 2050 and int(billline[2]) > 1900:
+                if len(billline) == 6 and 2050 > int(billline[2]) > 1900:
                     self.sql_execute(sql, billline)
                 else:
                     print("Bad Tax Overview Line: %s" % billline)
@@ -228,7 +256,7 @@ class COJData:
         sql = 'insert ignore into taxbillfeedetails ' + \
               '(re6, re4, year, folio, feecode, feeauthority, fees) values (%s, %s, %s, %s, %s, %s, %s)'
         tabledata = tree.xpath('//div[@id="lxT501"]/table/tr/td//text()')
-        if len(tabledata)>0:
+        if len(tabledata) > 0:
             for td in tabledata:
                 billline.append(td.replace('$', '').replace('\n', '').replace(',', '').replace('\t', ''))
                 columns = columns + 1
